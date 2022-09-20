@@ -11,6 +11,10 @@ public static class DbExtensions
             var services = scope.ServiceProvider;
 
             var context = services.GetRequiredService<ApplicationDbContext>();
+
+            // uncomment the following to delete it
+            // context.Database.EnsureDeleted();
+
             context.Database.EnsureCreated();
         }
     }
