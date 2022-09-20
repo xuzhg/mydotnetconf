@@ -13,6 +13,7 @@ namespace OData.WebApi.Models
             buildler.EntitySet<Student>("Students");
 
             buildler.EntityType<School>().Ignore(c => c.Emails);
+            buildler.EntityType<School>().CollectionProperty(c => c.ContactEmails);
 
             return buildler.GetEdmModel();
         }

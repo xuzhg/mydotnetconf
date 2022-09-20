@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.OData;
+using Microsoft.EntityFrameworkCore;
+using OData.WebApi.Extensions;
 using OData.WebApi.Models;
 
 namespace OData.WebApi;
@@ -10,6 +12,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=app.db"));
 
         builder.Services.AddControllers()
             .AddOData(opt =>
@@ -24,15 +27,19 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            app.UseODataRouteDebug();
+
             app.UseSwagger();
             app.UseSwaggerUI();
         }
 
-        app.UseAuthorization();
+        app.MakeSureDbCreated();
 
+        app.UseAuthorization();
 
         app.MapControllers();
 
         app.Run();
     }
 }
+
