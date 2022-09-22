@@ -16,7 +16,6 @@ namespace OData.WebApi.Models
         // It's not for Edm model, let's ignore when Edm model building
         public string Emails { get; set; }
 
-        [NotMapped] // It's not for DB, Let's ignore it.
         public IList<string> ContactEmails
         {
             get

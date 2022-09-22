@@ -1,33 +1,40 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OData.WebApi.Models;
 
 namespace OData.WebApi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [Route("odata")]
+    public class SchoolStudentController : ODataController
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        private readonly ApplicationDbContext _context;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public SchoolStudentController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("students")]
+        [HttpGet("students/$count")]
+        [EnableQuery]
+        public IActionResult GetStudents()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Ok(_context.Students);
+        }
+
+        [HttpGet("students/{id}")]
+        [EnableQuery]
+        public IActionResult GetStudent(int id)
+        {
+            Student student = _context.Students.FirstOrDefault(c => c.StudentId == id);
+            if (student is null)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                return NotFound($"Cannot find the student with Id '{id}'");
+            }
+
+            return Ok(student);
         }
     }
 }

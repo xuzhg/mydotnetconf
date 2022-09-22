@@ -6,9 +6,13 @@ namespace OData.WebApi.Models
     {
         public int StudentId { get; set; }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public Gender Gender { get; set; }
+
+        public int SchoolId { get; set; }
 
         public DateOnly BirthDay { get; set; }
     }
