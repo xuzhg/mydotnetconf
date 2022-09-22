@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Query.Expressions;
 using Microsoft.EntityFrameworkCore;
 using OData.WebApi.Extensions;
 using OData.WebApi.Models;
@@ -16,7 +17,9 @@ public class Program
 
         builder.Services.AddControllers()
             .AddOData(opt =>
-                opt.EnableQueryFeatures().AddRouteComponents("odata", EdmModelBuilder.GetEdmModel()));
+                opt.EnableQueryFeatures().AddRouteComponents("odata", EdmModelBuilder.GetEdmModel()
+                    ,services => services.AddSingleton<ISearchBinder, StudentSearchBinder>()
+                ));
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

@@ -13,7 +13,7 @@ public static class DbExtensions
             var context = services.GetRequiredService<ApplicationDbContext>();
 
             // uncomment the following to delete it
-             context.Database.EnsureDeleted();
+          //   context.Database.EnsureDeleted();
 
             context.Database.EnsureCreated();
         }

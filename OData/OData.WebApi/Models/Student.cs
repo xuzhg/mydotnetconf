@@ -12,6 +12,8 @@ namespace OData.WebApi.Models
 
         public Gender Gender { get; set; }
 
+        public int Grade { get; set; }
+
         public int SchoolId { get; set; }
 
         public DateOnly BirthDay { get; set; }
