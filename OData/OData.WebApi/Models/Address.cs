@@ -1,13 +1,12 @@
-﻿namespace OData.WebApi.Models
+﻿namespace OData.WebApi.Models;
+
+public class Address
 {
-    public class Address
-    {
-        public int AptNo { get; set; }
+    public int AptNo { get; set; }
 
-        public string City { get; set; }
+    public string City { get; set; }
 
-        public string Street { get; set; }
+    public string Street { get; set; }
 
-        public string ZipCode { get; set; }
-    }
+    public string ZipCode { get; set; }
 }

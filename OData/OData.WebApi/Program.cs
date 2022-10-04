@@ -17,9 +17,13 @@ public class Program
 
         builder.Services.AddControllers()
             .AddOData(opt =>
-                opt.EnableQueryFeatures().AddRouteComponents("odata", EdmModelBuilder.GetEdmModel()
-                    ,services => services.AddSingleton<ISearchBinder, StudentSearchBinder>()
-                ));
+                opt.EnableQueryFeatures()
+                .AddRouteComponents(
+                    "odata",
+                    EdmModelBuilder.GetEdmModel(),
+                    services => services.AddSingleton<ISearchBinder, StudentSearchBinder>()
+                ) // End of AddRouteComponents
+            ); // End of AddOData
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();

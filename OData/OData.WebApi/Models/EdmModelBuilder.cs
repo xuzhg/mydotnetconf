@@ -1,21 +1,20 @@
 ﻿using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 
-namespace OData.WebApi.Models
+namespace OData.WebApi.Models;
+public static class EdmModelBuilder
 {
-    public static class EdmModelBuilder
+    public static IEdmModel GetEdmModel()
     {
-        public static IEdmModel GetEdmModel()
-        {
-            ODataConventionModelBuilder buildler = new();
+        ODataConventionModelBuilder buildler = new();
 
-            buildler.EntitySet<School>("Schools");
-            buildler.EntitySet<Student>("Students");
+        buildler.EntitySet<School>("Schools");
+        buildler.EntitySet<Student>("Students");
 
-            buildler.EntityType<School>().Ignore(c => c.Emails);
-            buildler.EntityType<School>().CollectionProperty(c => c.ContactEmails);
+        buildler.EntityType<School>().Ignore(c => c.Emails);
+        buildler.EntityType<School>()
+            .CollectionProperty(c => c.ContactEmails);
 
-            return buildler.GetEdmModel();
-        }
+        return buildler.GetEdmModel();
     }
 }
