@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.OData.Routing.Attributes;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json;
 
 namespace OData.WebApi.Models
 {

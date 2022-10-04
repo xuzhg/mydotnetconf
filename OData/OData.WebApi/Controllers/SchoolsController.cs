@@ -19,12 +19,16 @@ namespace OData.WebApi.Controllers
         [EnableQuery]
         public IActionResult Get()
         {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             return Ok(_context.Schools);
         }
 
         [EnableQuery]
         public IActionResult Get(int key)
         {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             School school = _context.Schools.Include(c => c.Students).FirstOrDefault(c => c.SchoolId == key);
             if (school is null)
             {

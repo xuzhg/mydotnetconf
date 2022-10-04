@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OData.WebApi.Models;
 
 namespace OData.WebApi.Controllers
@@ -24,6 +23,7 @@ namespace OData.WebApi.Controllers
             return Ok(_context.Students);
         }
 
+        // [HttpGet("students({id})")] comment out intentionally
         [HttpGet("students/{id}")]
         [EnableQuery]
         public IActionResult GetStudent(int id)
