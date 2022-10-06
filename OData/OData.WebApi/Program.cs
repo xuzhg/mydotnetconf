@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.OData.Formatter.Serialization;
 using Microsoft.AspNetCore.OData.Query.Expressions;
 using Microsoft.EntityFrameworkCore;
 using OData.WebApi.Extensions;
@@ -21,7 +22,9 @@ public class Program
                 .AddRouteComponents(
                     "odata",
                     EdmModelBuilder.GetEdmModel(),
-                    services => services.AddSingleton<ISearchBinder, StudentSearchBinder>()
+                    services => services.AddSingleton<ISearchBinder, StudentSearchBinder>().
+                        AddSingleton<ISelectExpandBinder, SchoolStudentSelectExpandBinder>().
+                        AddSingleton<ODataResourceSerializer, MyResourceSerializer>()
                 ) // End of AddRouteComponents
             ); // End of AddOData
 
