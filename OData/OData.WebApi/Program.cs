@@ -24,7 +24,8 @@ public class Program
                     EdmModelBuilder.GetEdmModel(),
                     services => services.AddSingleton<ISearchBinder, StudentSearchBinder>().
                         AddSingleton<ISelectExpandBinder, SchoolStudentSelectExpandBinder>().
-                        AddSingleton<ODataResourceSerializer, MyResourceSerializer>()
+                        AddSingleton<ODataResourceSerializer, MyResourceSerializer>().
+                        AddSingleton<IFilterBinder, SchoolStudentFilterBinder>()
                 ) // End of AddRouteComponents
             ); // End of AddOData
 

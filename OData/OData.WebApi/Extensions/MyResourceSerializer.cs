@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Extensions.Primitives;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace OData.WebApi.Extensions;
 
@@ -30,18 +31,23 @@ public class MyResourceSerializer : ODataResourceSerializer
 
             object propertyValue = resourceContext.GetPropertyValue(structuralProperty.Name);
 
-            string strValue = propertyValue as string;
             ODataValue value;
-            if (strValue is null)
+            if (propertyValue is null)
             {
                 value = new ODataCollectionValue();
             }
-            else
+            else if (propertyValue is string strValue)
             {
                 IList<string> list = JsonSerializer.Deserialize<IList<string>>(strValue);
 
                 ODataCollectionSerializer collectionSerializer = serializer as ODataCollectionSerializer;
                 value = collectionSerializer.CreateODataValue(list, structuralProperty.Type, resourceContext.SerializerContext);
+            }
+            else
+            {
+                // It's a string already, because there's no $select=ContactEmails
+                ODataCollectionSerializer collectionSerializer = serializer as ODataCollectionSerializer;
+                value = collectionSerializer.CreateODataValue(propertyValue, structuralProperty.Type, resourceContext.SerializerContext);
             }
 
             return new ODataProperty
