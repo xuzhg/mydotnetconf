@@ -25,5 +25,10 @@ public class School
         }
     }
 
+    // It's not for Edm model, let's ignore when Edm model building
+    public string Branches { get; set; }
+
+    public IList<Address> BranchAddresses { get; set; }
+
     public IList<Student> Students { get; set; }
 }

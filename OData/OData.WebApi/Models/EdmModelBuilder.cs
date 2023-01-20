@@ -11,9 +11,12 @@ public static class EdmModelBuilder
         buildler.EntitySet<School>("Schools");
         buildler.EntitySet<Student>("Students");
 
-        buildler.EntityType<School>().Ignore(c => c.Emails);
-        buildler.EntityType<School>()
-            .CollectionProperty(c => c.ContactEmails);
+        var schoolConf = buildler.EntityType<School>();
+        schoolConf.Ignore(c => c.Emails);
+        schoolConf.CollectionProperty(c => c.ContactEmails);
+
+        schoolConf.Ignore(c => c.Branches);
+        schoolConf.CollectionProperty(c => c.BranchAddresses).Name = "Branches"; // Change the name same as the name in DB
 
         return buildler.GetEdmModel();
     }

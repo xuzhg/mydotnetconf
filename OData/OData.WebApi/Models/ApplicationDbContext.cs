@@ -17,19 +17,20 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<School>().Ignore(s => s.ContactEmails);
+        modelBuilder.Entity<School>().Ignore(s => s.BranchAddresses);
         modelBuilder.Entity<School>().HasKey(x => x.SchoolId);
 
         modelBuilder.Entity<School>()
             .HasData(
-                new { SchoolId = 1, SchoolName = "Mercury Middle School", Emails = "[\"info@mercury.com, help@mercury.com\"]" },
-                new { SchoolId = 2, SchoolName = "Venus High School", Emails = "[\"water@venus.com\"]" },
-                new { SchoolId = 3, SchoolName = "Earth Univerity", Emails = "[\"humen@earth.com,animals@earth.com,plants@earth.com\"]" },
-                new { SchoolId = 4, SchoolName = "Mars Elementary School ", Emails = "[\"weather@mars.com\"]" },
-                new { SchoolId = 5, SchoolName = "Jupiter College", Emails = "[\"news@jupiter.org\"]" },
-                new { SchoolId = 6, SchoolName = "Saturn Middle School", Emails = "[\"support@saturn.com\"]" },
-                new { SchoolId = 7, SchoolName = "Uranus High School", Emails = "[\"info@uranus.com\"]" },
-                new { SchoolId = 8, SchoolName = "Neptune Elementary School", Emails = "[\"tech@neptune.org, support@neptune.edu\"]" },
-                new { SchoolId = 9, SchoolName = "Pluto University", Emails = "[\"priciple@pluto.edu, support@pluto.com\"]" }
+                new { SchoolId = 1, SchoolName = "Mercury Middle School", Emails = "[\"info@mercury.com, help@mercury.com\"]", Branches = "[{\"Street\":\"1615 Anzac Avenue\",\"City\":\"Kallangur\",\"ZipCode\":\"4503\",\"AptNo\":27},{\"Street\":\"712 NE Avenue\",\"City\":\"LasVegs\",\"ZipCode\":\"9872\",\"AptNo\":127}]" },
+                new { SchoolId = 2, SchoolName = "Venus High School", Emails = "[\"water@venus.com\"]", Branches = "[{\"Street\":\"987 venus Avenue\",\"City\":\"Venus\",\"ZipCode\":\"9871\",\"AptNo\":7}]" },
+                new { SchoolId = 3, SchoolName = "Earth Univerity", Emails = "[\"humen@earth.com,animals@earth.com,plants@earth.com\"]", Branches = "[{\"Street\":\"156TH AVE NE\",\"City\":\"Redmond\",\"ZipCode\":\"98004\",\"AptNo\":23},{\"Street\":\"148TH NE Avenue\",\"City\":\"Bellevue\",\"ZipCode\":\"98006\",\"AptNo\":101}]" },
+                new { SchoolId = 4, SchoolName = "Mars Elementary School ", Emails = "[\"weather@mars.com\"]", Branches = "[{\"Street\":\"119TH Rd\",\"City\":\"Langur\",\"ZipCode\":\"4503\",\"AptNo\":27}]" },
+                new { SchoolId = 5, SchoolName = "Jupiter College", Emails = "[\"news@jupiter.org\"]", Branches = "[{\"Street\":\"87TH Avenue\",\"City\":\"Gur\",\"ZipCode\":\"4503\",\"AptNo\":27},{\"Street\":\"19TH NE Avenue\",\"City\":\"Legs\",\"ZipCode\":\"42\",\"AptNo\":13}]" },
+                new { SchoolId = 6, SchoolName = "Saturn Middle School", Emails = "[\"support@saturn.com\"]", Branches = "[{\"Street\":\"242 Avenue\",\"City\":\"Sammm\",\"ZipCode\":\"503\",\"AptNo\":27},{\"Street\":\"228 Avenue\",\"City\":\"Seatle\",\"ZipCode\":\"172\",\"AptNo\":17}]" },
+                new { SchoolId = 7, SchoolName = "Uranus High School", Emails = "[\"info@uranus.com\"]", Branches = "[{\"Street\":\"242 SE 37TH\",\"City\":\"Issaqur\",\"ZipCode\":\"029\",\"AptNo\":10}" },
+                new { SchoolId = 8, SchoolName = "Neptune Elementary School", Emails = "[\"tech@neptune.org, support@neptune.edu\"]", Branches = "[{\"Street\":\"Avenue NE\",\"City\":\"Angur\",\"ZipCode\":\"503\",\"AptNo\":2},{\"Street\":\"11 NE SE\",\"City\":\"Lgs\",\"ZipCode\":\"902\",\"AptNo\":111}]" },
+                new { SchoolId = 9, SchoolName = "Pluto University", Emails = "[\"priciple@pluto.edu, support@pluto.com\"]", Branches = "[{\"Street\":\"Main ST\",\"City\":\"Kallr\",\"ZipCode\":\"112\",\"AptNo\":27},{\"Street\":\"Sub NE\",\"City\":\"Veglas\",\"ZipCode\":\"134\",\"AptNo\":32}]" }
             );
 
         // config the complex value for MailAddress of each School
