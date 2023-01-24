@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddDbContext<AuthorContext>(options => options.UseSqlite("Data Source=author.db"));
+//builder.Services.AddDbContext<AuthorContext>(options => options.UseSqlite("Data Source=author.db")); // JSON Column not supported for SQLlite
 builder.Services.AddDbContext<AuthorContext>(options => options.UseSqlServer(@$"Server=(localdb)\mssqllocaldb;Database=AuthorJsonColumn"));
 
 builder.Services.AddControllers()
