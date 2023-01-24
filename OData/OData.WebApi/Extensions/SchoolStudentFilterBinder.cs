@@ -1,14 +1,73 @@
 ﻿using Microsoft.AspNetCore.OData.Query.Expressions;
 using Microsoft.OData.UriParser;
-using OData.WebApi.Models;
 using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json;
 
 namespace OData.WebApi.Extensions;
 
 public class SchoolStudentFilterBinder : FilterBinder
 {
+    /*
+    public override Expression BindCountNode(CountNode node, QueryBinderContext context)
+    {
+        // $filter=Branches/$count eq 1
+        if (node.Source is CollectionComplexNode collectionComplexNode && 
+            string.Equals(collectionComplexNode.Property.Name, "Branches", StringComparison.OrdinalIgnoreCase))
+        {
+            Expression source = context.CurrentParameter;
+
+            // $it.BranchAddresses
+            PropertyInfo emailsProperty = context.ElementClrType.GetProperty("BranchAddresses");
+            source = Expression.Property(source, emailsProperty);
+
+            source.Type.IsCollection(out Type elementType);
+
+            MethodInfo countMethod = GetLongCountMethodInfo(elementType);
+
+            Expression countExpression = Expression.Call(null, countMethod, new[] { source });
+
+            return countExpression;
+        }
+
+        return base.BindCountNode(node, context);
+    }
+
+    public override Expression BindCountNode(CountNode node, QueryBinderContext context)
+    {
+        // $filter=Branches/$count eq 1
+        if (node.Source is CollectionComplexNode collectionComplexNode &&
+            string.Equals(collectionComplexNode.Property.Name, "Branches", StringComparison.OrdinalIgnoreCase))
+        {
+            Expression source = context.CurrentParameter;
+
+            // $it.Branches
+            PropertyInfo branchesProperty = context.ElementClrType.GetProperty("Branches");
+            Expression branchesSource = Expression.Property(source, branchesProperty);
+
+            MethodInfo deserializeMethod = MethodInfoHelpers.JsonDeserializeMi.MakeGenericMethod(typeof(IList<Address>));
+            Expression jsonSerializerOptions = Expression.New(typeof(JsonSerializerOptions));
+
+            // JsonSerializer.Deserialize<IList<Address>>(it.Branches, new JsonSerializerOptions())
+            Expression deserializeCallExpression = Expression.Call(null, deserializeMethod, new[] { branchesSource, jsonSerializerOptions });
+
+           // MethodInfo enumerableSelectMethod = MethodInfoHelpers.EnumerableSelectMi.MakeGenericMethod(typeof(School), typeof(IList<Address>));
+
+            // Select($it, ($it) => JsonSerializer.Deserialize<IList<Address>>(it.Branches, new JsonSerializerOptions()))
+            //Expression selectCall = Expression.Call(null, enumerableSelectMethod, new[] { context.CurrentParameter, deserializeCallExpression });
+
+            MethodInfo countMethod = MethodInfoHelpers.EnumerableLongCountMi.MakeGenericMethod(typeof(Address));
+
+            Expression countExpression = Expression.Call(null, countMethod, new[] { deserializeCallExpression });
+
+            return countExpression;
+        }
+
+        return base.BindCountNode(node, context);
+    }
+    */
+
     public override Expression BindAnyNode(AnyNode anyNode, QueryBinderContext context)
     {
         // ?$filter=ContactEmails/any(a: a eq 'help@mercury.com')

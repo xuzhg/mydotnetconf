@@ -25,5 +25,20 @@ public class School
         }
     }
 
+    // It's not for Edm model, let's ignore when Edm model building
+    public string Branches { get; set; }
+
+    public IList<Address> BranchAddresses
+    {
+        get
+        {
+            return Branches is null ? new List<Address>() : JsonSerializer.Deserialize<IList<Address>>(Branches);
+        }
+        set
+        {
+            Branches = value is null ? string.Empty : JsonSerializer.Serialize(value);
+        }
+    }
+
     public IList<Student> Students { get; set; }
 }

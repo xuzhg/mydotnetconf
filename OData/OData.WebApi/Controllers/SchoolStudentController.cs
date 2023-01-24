@@ -17,7 +17,7 @@ public class SchoolStudentController : ODataController
 
     [HttpGet("students")]
     [HttpGet("students/$count")]
-    [EnableQuery]
+    [EnableQuery(PageSize = 2)]
     public IActionResult GetStudents()
     {
         return Ok(_context.Students);
@@ -35,5 +35,20 @@ public class SchoolStudentController : ODataController
         }
 
         return Ok(student);
+    }
+
+    [HttpPost("schools({schoolId})/students")]
+    public IActionResult Post(int schoolId, [FromBody] Student student)
+    {
+        /*
+        School school = _context.Schools.Include(c => c.Students)
+            .FirstOrDefault(s => s.SchoolId == schoolId);
+        */
+        _context.Students.Add(student);
+        student.SchoolId = schoolId;
+
+       //school.Students.Add(student);
+        _context.SaveChanges();
+        return Created(student);
     }
 }
