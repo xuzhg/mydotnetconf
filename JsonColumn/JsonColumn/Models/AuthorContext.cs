@@ -11,6 +11,8 @@ namespace JsonColumn.Models
         {
         }
 
+        public static Array JsonQuery(string expression, string path) => throw new NotImplementedException();
+
         public DbSet<Author> Authors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

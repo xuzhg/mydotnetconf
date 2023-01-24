@@ -17,7 +17,9 @@ namespace JsonColumn.Controllers
         [EnableQuery]
         public IActionResult Get()
         {
-            var authorsInChigley = Context.Authors.AsEnumerable().Where(a => a.Addresses.Count == 2);
+            // var aa = Context.Authors.Where(a => AuthorContext.JsonQuery(a.Addresses))
+
+            var authorsInChigley = Context.Authors/*.AsEnumerable()*/.Where(a => a.Addresses.Count == 2);
             foreach (var author in authorsInChigley)
             {
 
