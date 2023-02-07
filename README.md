@@ -9,6 +9,14 @@ Here's Student sample data:
 <img width="414" alt="image" src="https://user-images.githubusercontent.com/9426627/213791579-29189f9a-9e16-4c5f-b97b-3a23d4a98a90.png">
 
 
+# Updated on 2/7/2023: make the basic query on JSON array column:
+
+For example: http://localhost:5168/odata/schools?$filter=Branches/any(a: a/City eq 'Gur')
+
+![image](https://user-images.githubusercontent.com/9426627/217338339-31b2cc91-1af0-4980-81f3-d5a5eff70f03.png)
+
+
+
 ## Basic usages
 
 Run the service and try any of these requests:
@@ -79,3 +87,5 @@ http://localhost:5168/odata/students?$search="A%2B"&$select=Grade
 ## More $filter
 
 http://localhost:5168/odata/schools?$filter=ContactEmails/any(a: a eq 'help@mercury.com')
+
+http://localhost:5168/odata/schools?$filter=Branches/any(a: a/City eq 'Gur')
